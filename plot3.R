@@ -1,0 +1,6 @@
+png("plot3.png")
+plot(data$Time, data$Sub_metering_1, ylab = "Energy sub metering", xlab = "", type = "l")
+lines(data$Time, data$Sub_metering_2, col = "red")
+lines(data$Time, data$Sub_metering_3, col = "blue")
+legend("topright", names(data)[7:9], lty = 1, col = c("black", "red", "blue"))
+dev.off()
