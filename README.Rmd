@@ -1,0 +1,39 @@
+---
+title: "Base Graphics Demo"
+output: html_document
+---
+
+The goal of report is to demo the base graphics functions using the UC Irvine Machine Learning Repository, with the "Individual household electric power consumption" Data set, altered for the coursera assignment 1 for Exploratory Data Analysis, by Roger Peng.  
+
+For this assignment, four plots must be recreated with this data using base graphics, with the code snippets uploaded and the plots as .PNG files uploaded as well, to the github repo.  This report will catalog the entire process, code and plots additionally to the individual snipets and plots.
+
+```{r, cache = TRUE, echo = TRUE}
+#Locate and download the data from the w
+setwd("/home/edecambra/github/uci_machine_learn_R/")# retrieving the data
+if(!file.exists("power_consume.zip")){
+url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+download.file(url, "power_consume.zip", method = "wget")
+unzip("power_consume.zip")
+system("rm power_consume.zip")}
+
+#load data, and decompress
+data <- read.table("household_power_consumption.txt", header = TRUE, 
+                   sep = ";", na.strings = "?")
+data$Date <- as.Date(data$Date, format = "%d/%m/%Y")  #date convert
+data$Date <- strptime(paste(data$Date, data$Time, sep = "-"), format = "%d/%m/%Y-%H:%M:%S") #time convert
+data <- data[(data$Date %in% c("2007-02-01", "2007-02-02")),]
+str(data)
+head(data)
+
+```
+
+The first plot is a histogram of the global active power variable in the data set, named "Global_active_power".  The code to replicate the desired plot is as follows:
+``{r}
+png("plot1.png")
+hist(data$Global_active_power, main = "Global Active Power",
+    xlab = "Global Active Power (killowatts)", col = "red", axes = FALSE )
+
+axis(side = 1, at = c(0,2,4,6), labels = c("0", "2", "4", "6")) 
+axis(side = 2, at = c(0,200,400,600,800,1000,1200), labels = c("0","200","400","600", "800", "1000", "1200")) 
+dev.off()
+```
