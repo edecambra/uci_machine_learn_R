@@ -1,7 +1,5 @@
----
-title: "Base Graphics Demo"
-output: html_document
----
+Base Graphics Demo
+====
 
 The goal of report is to demo the base graphics functions using the UC Irvine Machine Learning Repository, with the "Individual household electric power consumption" Data set, altered for the coursera assignment 1 for Exploratory Data Analysis, by Roger Peng.  
 
